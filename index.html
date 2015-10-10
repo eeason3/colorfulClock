@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>The Colors of Time</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<style>
+body {
+  background-color: #000;
+  font-family: "Helvetica", sans-serif;
+  color: #fff;
+}
+#time {
+  font-size: 60px;
+  width: 10em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40vh;
+  text-align: center;
+  cursor: pointer;
+}
+
+</style>
+
+<script>
+  var clock = true;
+
+  function flip() {
+    if (clock) {
+      clock = false;
+    } else {
+      clock = true;
+    }
+  }
+
+  var timeRunner = window.setInterval(function() {
+    var now = new Date();
+    if (now.getHours() >= 10) {
+      var hours = now.getHours();
+    } else {
+      var hours = "0" + now.getHours();
+    }
+    if (now.getMinutes() >= 10) {
+      var minutes = now.getMinutes();
+    } else {
+      var minutes = "0" + now.getMinutes();
+    }
+    if (now.getSeconds() >= 10) {
+      var seconds = now.getSeconds();
+    } else {
+      var seconds = "0" + now.getSeconds();
+    }
+    var color = "rgb(" + (10*hours) + ", " +  (4*minutes) + ", " + (4*seconds) + ")";
+
+    if (clock) {
+      $("#time").css("font-size", "60px");
+      $("#time").text(hours + " : " + minutes + " : " + seconds);
+    } else {
+      $("#time").css("font-size", "45px");
+      $("#time").text(color);
+    }
+
+    var body = document.body;
+    body.addEventListener("click", flip, false);
+
+
+    $("body").css("background-color", color);
+
+  }, 1000);
+</script>
+</head>
+<body>
+  <div id="time">00 : 00 : 00</div>
+
+</body>
+</html>
